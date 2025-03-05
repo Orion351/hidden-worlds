@@ -1,0 +1,16 @@
+{
+	"name": "hidden-worlds",
+	"version": "0.0.2",
+	"title": "Hidden Worlds",
+	"author": "Galdoc",
+	"factorio_version": "2.0",
+  "package":{
+		"ignore":[ "dev/**", "*.py", "*.md" ]
+  },
+	"dependencies": ["base >= 2.0",
+		"icon-badges >= 1.0.0",
+		"quality",
+		"elevated-rails",
+		"space-age"
+	]
+}
