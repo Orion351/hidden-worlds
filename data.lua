@@ -2,9 +2,9 @@
 HW_globals = HW_globals or {}
 
 local items = {
-  ["primitive-intermeidates"] = {"rope"},
+  ["primitive-intermeidates"] = {"rope", "rope-fibers"},
   ["earths"] = {"dry-clay", "wet-clay"},
-  ["woods"] = {"bark", "timber-hardwood", "timber-softwood", "lumber-hardwood", "lumber-softwood", "timber-split-hardwood", "timber-split-softwood", "lumber-split-hardwood", "lumber-split-softwood"}
+  ["woods"] = {"bark", "timber-hardwood", "timber-softwood", "lumber-hardwood", "lumber-softwood", "timber-split-hardwood", "timber-split-softwood", "lumber-split-hardwood", "lumber-split-softwood", "plant-debris", "dried-plant-debris", "sap"}
 }
 
 for dir, things in pairs(items) do
@@ -25,8 +25,23 @@ for dir, things in pairs(items) do
   end
 end
 
--- Compound Entity POC
+data:extend{
+  {
+    type = "recipe",
+    name = "timber-hardwood-splitting",
+    
+    ingredients = {{type = "item", name = "timber-hardwood", amount = 1}},
+    results = {{type = "item", name = "timber-split-hardwood", amount = 2}},
 
+    group = "intermeidates",
+    order = "z",
+
+    enabled = false
+  }
+}
+
+
+-- Compound Entity POC
 data:extend{
   {
     type = "item",
@@ -58,3 +73,17 @@ data:extend{
   }
 }
 
+data:extend{
+  {
+    type = "technology",
+    name = "timberworking",
+    icon = "__hidden-worlds__/graphics/icons/technology/timberworking.png",
+    icon_size = 256,
+    enabled = true,
+    essential = true,
+    effects = {{type = "unlock-recipe", recipe = "timber-hardwood-splitting"}},
+    research_trigger = {type = "craft-item", item = "iron-gear-wheel", count = 100},
+    
+    hw_prototype_data = {}
+  }
+}

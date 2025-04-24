@@ -54,6 +54,8 @@ end
 
 function hide_all_tech()
   for _, tech in pairs(data.raw.technology) do
-    tech.hidden = true
+    if not tech.hw_prototype_data then
+      tech.hidden = true
+    end
   end
 end
