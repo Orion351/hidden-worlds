@@ -87,3 +87,34 @@ data:extend{
     hw_prototype_data = {}
   }
 }
+
+local spaceship_flooring = table.deepcopy(data.raw.tile["lab-white"])
+spaceship_flooring.icon = "__hidden-worlds__/graphics/terrain/space/spaceship-flooring/spaceship-flooring-test.png"
+spaceship_flooring.name = "spaceship-flooring"
+-- local variants_main = {}
+-- for i = 1, 10 do
+--   table.insert(variants_main,     {
+--     picture = "__hidden-worlds__/graphics/terrain/space/spaceship-flooring/spaceship-flooring-00" .. i .. ".png",
+--     count = 1,
+--     size = 1,
+--     scale = 0.5
+--   }
+-- )
+-- end
+
+spaceship_flooring.variants =
+{
+  main = {
+    {
+      size = 1,
+      probability = 1,
+      picture = "__hidden-worlds__/graphics/terrain/space/spaceship-flooring/spaceship-flooring-1x1-tspritesheet.png",
+      count = 10,
+      scale = 0.5
+    }
+  },
+  empty_transitions = true
+}
+spaceship_flooring.order = "z[other]-b[spaceship-flooring]-c[spaceship-flooring]"
+data:extend({spaceship_flooring})
+
