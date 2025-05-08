@@ -154,3 +154,11 @@ test_pipe.name = "test_pipe"
 test_pipe.fluid_box.filter = "torque"
 data:extend{test_pipe}
 local a = 1
+
+data:extend{
+  {
+    type = "container",
+    name = "slide_container",
+    
+  }
+}
