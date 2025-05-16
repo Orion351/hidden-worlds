@@ -117,4 +117,3 @@ spaceship_flooring.variants =
 }
 spaceship_flooring.order = "z[other]-b[spaceship-flooring]-c[spaceship-flooring]"
 data:extend({spaceship_flooring})
-

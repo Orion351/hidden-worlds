@@ -155,10 +155,71 @@ test_pipe.fluid_box.filter = "torque"
 data:extend{test_pipe}
 local a = 1
 
-data:extend{
+-- data:extend{
+--   {
+--     type = "container",
+--     name = "slide_container",
+--   }
+-- }
+
+data:extend({
   {
-    type = "container",
-    name = "slide_container",
-    
+    type = "item",
+    name = "spaceship-control-console",
+    stack_size = 10,
+    icon = "__hidden-worlds__/graphics/icons/entity/spaceship-control-console-icon.png",
+    icon_size = 64,
+    place_result = "spaceship-control-console"
+  },
+  {
+    type = "simple-entity-with-owner",
+    name = "spaceship-control-console",
+    animations = {
+      sheets = {{
+        filename = "__hidden-worlds__/graphics/entity/spaceship-control-console/spaceship-control-console-frames.png",
+        height = 256,
+        width = 256,
+        variation_count = 1,
+        scale = 0.5,
+        line_length = 6,
+        frame_count = 30,
+        animation_speed = 0.5,
+      },
+      {
+        filename = "__hidden-worlds__/graphics/entity/spaceship-control-console/spaceship-control-console-shadow.png",
+        height = 205,
+        width = 287,
+        variation_count = 1,
+        scale = 0.5,
+        draw_as_shadow = true,
+        line_length = 1,
+        frame_count = 1,
+        frame_sequence = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, },
+        animation_speed = 0.5,
+        shift = {x = 10.5 / 32, y = 15 / 32},
+      },
+      -- {
+      --   filename = "__hidden-worlds__/graphics/entity/spaceship-control-console/spaceship-control-console-glow-frames.png",
+      --   height = 256,
+      --   width = 256,
+      --   variation_count = 1,
+      --   scale = 0.5,
+      --   draw_as_glow = true,
+      --   line_length = 6,
+      --   frame_count = 30,
+      --   animation_speed = 0.5,
+      --   blend_mode = "additive",
+      --   tint = {r = 1, g = 1, b = 1, a = 0.0}
+      -- }
+    },
+    },
+    placeable_by = {item = "spaceship-control-console", count = 1},
+    collision_box = {{-1.9, -1.9}, {1.9, 1.9}},
+    selection_box = {{-2, -2}, {2, 2}},
+    minable = {
+      mining_time = 1,
+      count = 1,
+      result = "spaceship-control-console",
+    }
   }
-}
+})
