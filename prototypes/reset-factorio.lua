@@ -1,1 +1,0 @@
-hide_all_tech()
