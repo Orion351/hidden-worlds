@@ -4,6 +4,7 @@ local splitterEntity = {
   type = "furnace",
   crafting_speed = 1,
   minable = {mining_time = 0.2, result = "log-splitter"},
+  flags = {"placeable-neutral", "placeable-player", "player-creation"},
   energy_usage = "100kW",
   energy_source = {
     type = "fluid",

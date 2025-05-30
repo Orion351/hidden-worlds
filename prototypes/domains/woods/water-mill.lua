@@ -48,6 +48,7 @@ local waterMill = {
   fixed_recipe = waterMillTorqueRecipe.name,
   crafting_speed = 1,
   crafting_categories = {"water-mill"},
+  flags = {"placeable-neutral", "placeable-player", "player-creation"},
   energy_usage = "1W",
   energy_source = {type = "void"},
   minable = {mining_time = 0.2, result = "water-mill"},

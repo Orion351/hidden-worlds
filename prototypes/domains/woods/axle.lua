@@ -27,7 +27,7 @@ local axleEntity = {
   energy_usage = "1W",
   energy_source = {type = "void"},
   minable = {mining_time = 0.2, result = "axle"},
-  
+  flags = {"placeable-neutral", "placeable-player", "player-creation"},
   collision_box = {{-0.4, -2.4}, {0.4, 2.4}},
   selection_box = {{-0.5, -2.5}, {0.5, 2.5}},
   fluid_boxes = {
