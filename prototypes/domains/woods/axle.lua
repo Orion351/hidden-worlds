@@ -76,13 +76,13 @@ local axleEntity = {
     graphics_set = {
         animation = {
             north = {
-                filename = "__hidden-worlds__/graphics/entity/placeholder/hw-grey-box-1x5.png",
+                filename = "__hidden-worlds__/graphics/greybox/grey-boxes/hw-grey-box-1x5.png",
                 width = 64,
                 height = 320,
                 scale = 0.5
             },
             west = {
-                filename = "__hidden-worlds__/graphics/entity/placeholder/hw-grey-box-5x1.png",
+                filename = "__hidden-worlds__/graphics/greybox/grey-boxes/hw-grey-box-5x1.png",
                 width = 320,
                 height = 64,
                 scale = 0.5
