@@ -78,11 +78,11 @@ local function make_stock_to_part_fanout(stock, part, crafting_machine_tint, cat
       local icons = {
         {
           icon = "__hidden-worlds__/graphics/icons/woods/" .. property .. "-wood-" .. part .. "/" .. property .. "-wood-" .. part .. "-0000.png",
-          icon_size = 128,
+          icon_size = 64,
         }
       }
       -- FIXME add an SDF to the icons
-      Build_img_badge_icon(icons, {"__hidden-worlds__/graphics/icons/woods/" .. material .. "-" .. stock .. "/" .. material .. "-" .. stock .. "-0000.png"}, 128, HW_Global.stock_badge_scale, 0, "right-top", 0)
+      Build_img_badge_icon(icons, {"__hidden-worlds__/graphics/icons/woods/" .. material .. "-" .. stock .. "/" .. material .. "-" .. stock .. "-0000.png"}, 64, HW_Global.stock_badge_scale, 0, "right-top", 0)
       -- tags
       local tags = {}
       -- Do The Thing
