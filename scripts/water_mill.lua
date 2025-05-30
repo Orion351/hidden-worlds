@@ -21,7 +21,7 @@ function water_mill:create()
     local entity = self.entity
     local pipe = entity.surface.create_entity {
         name = "linked_water_pipe",
-        position = {self.entity.position.x - 2, self.entity.position.y},--self.entity.position,
+        position = self.entity.position,
         force = self.force_index
     }
     if not pipe or not pipe.valid then error("Input pipe not valid") end
