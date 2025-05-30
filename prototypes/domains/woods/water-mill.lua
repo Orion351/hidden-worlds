@@ -72,7 +72,8 @@ local waterMill = {
       pipe_connections = {{
         flow_direction = "output",
         direction = defines.direction.north --[[@as data.Direction]],
-        position = {0, -1}
+        position = {0, -1},
+        connection_category = "torque"
       }}
     }
   },

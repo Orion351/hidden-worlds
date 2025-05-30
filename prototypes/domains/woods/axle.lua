@@ -39,11 +39,13 @@ local axleEntity = {
         {
           flow_direction = "input-output",
           direction = defines.direction.north --[[@as data.Direction]],
-          position = {0, -2}
+          position = {0, -2},
+          connection_category = "torque"
         }, {
           flow_direction = "input-output",
           direction = defines.direction.south --[[@as data.Direction]],
-          position = {0, 2}
+          position = {0, 2},
+          connection_category = "torque"
         }
       }
       
@@ -55,19 +57,23 @@ local axleEntity = {
         {
           flow_direction = "output",
           direction = defines.direction.west --[[@as data.Direction]],
-          position = {0, -2}
+          position = {0, -2},
+          connection_category = "torque"
         }, {
           flow_direction = "output",
           direction = defines.direction.east --[[@as data.Direction]],
-          position = {0, -2}
+          position = {0, -2},
+          connection_category = "torque"
         }, {
           flow_direction = "output",
           direction = defines.direction.west --[[@as data.Direction]],
-          position = {0, 2}
+          position = {0, 2},
+          connection_category = "torque"
         }, {
           flow_direction = "output",
           direction = defines.direction.east --[[@as data.Direction]],
-          position = {0, 2}
+          position = {0, 2},
+          connection_category = "torque"
         }
       }
     }
