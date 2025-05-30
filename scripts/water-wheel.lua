@@ -1,23 +1,23 @@
 ---@alias unit_number integer
 
----@class WaterMillScriptData
----@field mills table<unit_number, WaterMill>
+---@class WaterWheelScriptData
+---@field wheels table<unit_number, WaterWheel>
 local script_data = {
-  mills = {}
+  wheels = {}
 }
 
----@class WaterMill
+---@class WaterWheel
 ---@field entity LuaEntity
 ---@field surface_index int
 ---@field force_index int
 ---@field unit_number int
 ---@field input_pipe LuaEntity
-local water_mill = {}
-water_mill.metatable = {__index = water_mill}
+local water_wheel = {}
+water_wheel.metatable = {__index = water_wheel}
 
-script.register_metatable("water_mill", water_mill.metatable)
+script.register_metatable("water_wheel", water_wheel.metatable)
 
-function water_mill:create()
+function water_wheel:create()
   local entity = self.entity
   local pipe = entity.surface.create_entity {
     name = "linked_water_pipe",
@@ -34,27 +34,27 @@ function water_mill:create()
   }
 end
 
-function water_mill:destroy()
+function water_wheel:destroy()
   if self.input_pipe and self.input_pipe.valid then
     self.input_pipe.destroy()
   end
-  script_data.mills[self.entity.unit_number] = nil
+  script_data.wheels[self.entity.unit_number] = nil
 end
 
-function water_mill.new(entity)
+function water_wheel.new(entity)
   script.register_on_object_destroyed(entity)
   
-  local mill = {
+  local wheel = {
     entity = entity,
     surface_index = entity.surface.index,
     force_index = entity.force.index,
     unit_number = entity.unit_number,
   }
-  setmetatable(mill, water_mill.metatable)
+  setmetatable(wheel, water_wheel.metatable)
   
-  mill:create()
+  wheel:create()
   
-  script_data.mills[entity.unit_number] = mill
+  script_data.wheels[entity.unit_number] = wheel
 end
 
 ---@param event EventData.on_built_entity|EventData.on_robot_built_entity|EventData.on_space_platform_built_entity|EventData.script_raised_revive|EventData.script_raised_built
@@ -62,9 +62,9 @@ local on_built_entity = function(event)
   local entity = event.entity
   if not (entity and entity.valid) then return end
   
-  if not (entity.name == "water-mill") then return end
+  if not (entity.name == "water-wheel") then return end
   
-  water_mill.new(entity)
+  water_wheel.new(entity)
 end
 
 ---@param event EventData.on_player_mined_entity|EventData.on_robot_mined_entity|EventData.on_space_platform_mined_entity|EventData.on_entity_died|EventData.script_raised_destroy
@@ -78,9 +78,9 @@ local on_entity_removed = function(event)
   end
   
   if not unit_number then return end
-  local mill = script_data.mills[unit_number]
-  if not mill then return end
-  mill:destroy()
+  local wheel = script_data.wheels[unit_number]
+  if not wheel then return end
+  wheel:destroy()
 end
 
 local entity_died_event_type = defines.events.on_entity_died
@@ -90,9 +90,9 @@ local on_object_destroyed = function(event)
   local unit_number = event.useful_id
   
   if not unit_number then return end
-  local mill = script_data.mills[unit_number]
-  if not mill then return end
-  mill:destroy()
+  local wheel = script_data.wheels[unit_number]
+  if not wheel then return end
+  wheel:destroy()
 end
 
 local lib = {}
@@ -115,11 +115,11 @@ lib.events =
 }
 
 lib.on_init = function()
-  storage.water_mill = storage.water_mill or script_data
+  storage.water_wheel = storage.water_wheel or script_data
 end
 
 lib.on_load = function()
-  script_data = storage.water_mill or script_data
+  script_data = storage.water_wheel or script_data
 end
 
 lib.on_configuration_changed = function()

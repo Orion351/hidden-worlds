@@ -1,12 +1,3 @@
--- Item Subgroup
-data:extend{
-  {
-    type = "item-subgroup",
-    name = "wood",
-    group = "intermediate-products"
-  }
-}
-
 -- Item Helper Functions
 local function make_wood_items(names, domain, order, weight, subgroup, fuel_value, tags)
   for _, name in pairs(names) do
@@ -50,6 +41,8 @@ local function make_wood_items(names, domain, order, weight, subgroup, fuel_valu
 end
 
 -- Items Creation
+--   Intermediates
+
 -- FIXME: Work out proper values for fuel_value
 
 -- Make timber
@@ -89,3 +82,41 @@ for _, property in pairs(HW_Global.wood.wood_properties) do
   make_wood_items({property .. "-wood-gear"},
     "woods", "d", 1 * kg, "wood", "1MJ", {"wood", "gear", "part", property})
 end
+
+--   Entities
+data:extend{
+  {
+    type = "item",
+    name = "axle-5x1",
+    icon = "__hidden-worlds__/graphics/icons/entity/axle.png",
+    icon_size = 64,
+    flags = {},
+    group = "production",
+    subgroup = "wood-assemblers",
+    --order = "za"..name, -- TODO
+    place_result = "axle-5x1",
+    stack_size = 50
+  },
+  {
+    type = "item",
+    name = "log-splitter",
+    icon = "__hidden-worlds__/graphics/icons/entity/log-splitter.png",
+    icon_size = 64,
+    flags = {},
+    group = "production",
+    subgroup = "wood-assemblers",
+    place_result = "log-splitter",
+    stack_size = 50
+  },
+  {
+    type = "item",
+    name = "water-wheel",
+    icon = "__hidden-worlds__/graphics/icons/entity/water-wheel.png",
+    icon_size = 64,
+    flags = {},
+    group = "production",
+    subgroup = "wood-assemblers",
+    place_result = "water-wheel",
+    stack_size = 50
+  }
+} 

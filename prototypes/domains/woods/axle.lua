@@ -1,7 +1,7 @@
 ---@type data.RecipeCategory
 local axleRecipeCategory = {
-  name = "axle",
-  type = "recipe-category"
+  type = "recipe-category",
+  name = "wood-axle"
 }
 
 ---@type data.RecipePrototype

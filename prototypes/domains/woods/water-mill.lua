@@ -23,16 +23,16 @@ local linked_water_pipe = {
 }
 
 ---@type data.RecipeCategory
-local waterMillRecipeCategory = {
-  name = "water-mill",
+local waterWheelRecipeCategory = {
+  name = "water-wheel",
   type = "recipe-category"
 }
 
 ---@type data.RecipePrototype
-local waterMillTorqueRecipe = {
-  name = "water-mill-torque-recipe",
+local waterWheelTorqueRecipe = {
+  name = "water-wheel-torque-recipe",
   type = "recipe",
-  category = waterMillRecipeCategory.name,
+  category = waterWheelRecipeCategory.name,
   ingredients = {
     {type="fluid", name="water", amount=50}
   },
@@ -42,16 +42,16 @@ local waterMillTorqueRecipe = {
 }
 
 ---@type data.AssemblingMachinePrototype
-local waterMill = {
-  name = "water-mill",
+local waterWheel = {
+  name = "water-wheel",
   type = "assembling-machine",
-  fixed_recipe = waterMillTorqueRecipe.name,
+  fixed_recipe = waterWheelTorqueRecipe.name,
   crafting_speed = 1,
-  crafting_categories = {"water-mill"},
+  crafting_categories = {"water-wheel"},
   flags = {"placeable-neutral", "placeable-player", "player-creation"},
   energy_usage = "1W",
   energy_source = {type = "void"},
-  minable = {mining_time = 0.2, result = "water-mill"},
+  minable = {mining_time = 0.2, result = "water-wheel"},
   
   collision_mask = {layers={object=true, train=true, is_object=true, is_lower_object=true, meltable=true}},
   collision_box = {{-1.4, -1.3}, {1.4, 1.4}},
@@ -91,34 +91,34 @@ local waterMill = {
       colliding_tiles = {layers={}}
     },
   },
-  icon = "__hidden-worlds__/graphics/icons/entity/waterMill.png"
+  icon = "__hidden-worlds__/graphics/icons/entity/waterWheel.png"
 }
-waterMill.graphics_set = table.deepcopy(data.raw["assembling-machine"]["assembling-machine-1"].graphics_set)
+waterWheel.graphics_set = table.deepcopy(data.raw["assembling-machine"]["assembling-machine-1"].graphics_set)
 
 ---@type data.ItemPrototype
-local waterMillItem = {
+local waterWheelItem = {
   type = "item",
-  name = waterMill.name,
-  icon = waterMill.icon,
+  name = waterWheel.name,
+  icon = waterWheel.icon,
   icon_size = 64,
   flags = {},
   subgroup = "extraction-machine",
   --order = "za"..name,
-  place_result = waterMill.name,
+  place_result = waterWheel.name,
   stack_size = 50
 }
 
 ---@type data.RecipePrototype
-local waterMillRecipe = {
-  name = "water-mill-recipe",
+local waterWheelRecipe = {
+  name = "water-wheel-recipe",
   type = "recipe",
   category = "basic-crafting",
   ingredients = {
   },
   results = {
-    {type = "item", name = waterMillItem.name, amount = 1}
+    {type = "item", name = waterWheelItem.name, amount = 1}
   }
 }
 
 ---@diagnostic disable-next-line: assign-type-mismatch
-data:extend{linked_water_pipe, waterMillRecipeCategory, waterMillTorqueRecipe, waterMill, waterMillItem, waterMillRecipe}
+data:extend{linked_water_pipe, waterWheelRecipeCategory, waterWheelTorqueRecipe, waterWheel, waterWheelItem, waterWheelRecipe}

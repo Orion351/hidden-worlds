@@ -1,10 +1,5 @@
--- Fuel Categories
-data:extend{
-  {
-    type = "fuel-category",
-    name = "wood"
-  },
-  {
+-- Torque
+data:extend{{
     name = "torque",
     type = "fluid",
     base_color = {150, 75, 50, 100},
@@ -14,8 +9,6 @@ data:extend{
     icons = {{
         icon = "__hidden-worlds__/graphics/icons/fluids/torque.png",
         tint = {150, 75, 50},
-        icon_size = 64
-
+        icon_size = 64,
     }}
-  }
-}
+}}

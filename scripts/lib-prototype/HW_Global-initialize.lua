@@ -1,1 +1,1 @@
-HW_Global.stock_badge_scale = 0.15
+HW_Global.stock_badge_scale = 0.3

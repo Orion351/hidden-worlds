@@ -1,15 +1,3 @@
--- Recipe Categories
-data:extend{
-  {
-    type = "recipe-category",
-    name = "log-splitter"
-  },
-  {
-    type = "recipe-category",
-    name = "wood-stripper"
-  },
-}
-
 -- "Recipe" Subgroups
 data:extend{
   {
@@ -25,7 +13,6 @@ data:extend{
 }
 
 -- Recipe Helper Functions
-
 local function make_wood_recipe(name, icons, crafting_machine_tint, category, subgroup, order, ingredients, results, main_product, tags)
   data:extend{
     {
@@ -91,5 +78,53 @@ local function make_stock_to_part_fanout(stock, part, crafting_machine_tint, cat
   end
 end
 
+-- Recipes Declarations
+-- Intermediates
 make_stock_to_part_fanout("split-lumber", "plank", {r = 1, g = 1, b = 1, a = 1}, "log-splitter", "log-splitter", "d", 2, 5, {}, {})
 make_stock_to_part_fanout("split-lumber", "plank", {r = 1, g = 1, b = 1, a = 1}, "log-splitter", "log-splitter", "d", 2, 5, {}, {})
+
+-- Wood Assembler Recipes
+
+data:extend{
+  {
+    name = "axle-recipe",
+    type = "recipe",
+    category = "basic-crafting",
+    ingredients = {}, -- TODO
+    results = {{type = "item", name = "axle-5x1", amount = 1}}
+  },
+  {
+    name = "log-splitter-recipe",
+    type = "recipe",
+    category = "basic-crafting",
+    ingredients = {}, -- TODO
+    results = {{type = "item", name = "log-splitter", amount = 1}}
+  },
+  {
+    name = "water-wheel-recipe",
+    type = "recipe",
+    category = "basic-crafting",
+    ingredients = {}, -- TODO
+    results = {{type = "item", name = "water-wheel", amount = 1}}
+  }
+}
+
+-- Supplementary Recipes
+-- Torque Recipe
+data:extend{
+  {
+    name = "axle-torque-recipe",
+    type = "recipe",
+    category = "wood-axle",
+    ingredients = {{type = "fluid", name = "torque", amount = 100}},
+    results = {{type = "fluid", name = "torque", amount = 90}}
+  },
+  {
+    name = "water-wheel-torque-recipe",
+    type = "recipe",
+    category = "water-wheel",
+    ingredients = {{type = "fluid", name = "water", amount = 50}},
+    results = {{type = "fluid", name = "torque", amount = 100}}
+  }
+}
+

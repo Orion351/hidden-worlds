@@ -28,7 +28,11 @@ require("prototypes/hw_anootations")
 -- Primitive
 -- *********
 require("prototypes/domains/woods/woods-const")
-require("prototypes/domains/woods/woods-supplementary")
+require("prototypes/domains/woods/woods-fuel-categories")
+require("prototypes/domains/woods/woods-item-subgroups")
 require("prototypes/domains/woods/woods-items")
+require("prototypes/domains/woods/woods-fluids")
+require("prototypes/domains/woods/woods-recipe-categories")
 require("prototypes/domains/woods/woods-recipes")
-require("prototypes/domains/woods/woods-machines")
+require("prototypes/domains/woods/woods-infinity-pipe")
+require("prototypes/domains/woods/woods-entities")
