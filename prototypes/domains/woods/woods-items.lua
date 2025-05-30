@@ -22,12 +22,12 @@ local function make_wood_items(names, domain, order, weight, subgroup, fuel_valu
         stack_size = HW_Global.wood.wood_stack_size,
         -- Display
         icon = "__hidden-worlds__/graphics/icons/" .. domain .. "/" ..  name .. "/" .. name .. "-0000.png",
-        icon_size = 128,
+        icon_size = 64,
         pictures = {
-          {size = 128, filename = "__hidden-worlds__/graphics/icons/" .. domain .. "/" .. name .. "/" .. name .. "-0000.png", scale = 0.25},
-          {size = 128, filename = "__hidden-worlds__/graphics/icons/" .. domain .. "/" .. name .. "/" .. name .. "-0001.png", scale = 0.25},
-          {size = 128, filename = "__hidden-worlds__/graphics/icons/" .. domain .. "/" .. name .. "/" .. name .. "-0002.png", scale = 0.25},
-          {size = 128, filename = "__hidden-worlds__/graphics/icons/" .. domain .. "/" .. name .. "/" .. name .. "-0003.png", scale = 0.25},
+          {size = 64, filename = "__hidden-worlds__/graphics/icons/" .. domain .. "/" .. name .. "/" .. name .. "-0000.png", scale = 0.5},
+          {size = 64, filename = "__hidden-worlds__/graphics/icons/" .. domain .. "/" .. name .. "/" .. name .. "-0001.png", scale = 0.5},
+          {size = 64, filename = "__hidden-worlds__/graphics/icons/" .. domain .. "/" .. name .. "/" .. name .. "-0002.png", scale = 0.5},
+          {size = 64, filename = "__hidden-worlds__/graphics/icons/" .. domain .. "/" .. name .. "/" .. name .. "-0003.png", scale = 0.5},
         },
         -- Organization
         group = "intermediate-products",
