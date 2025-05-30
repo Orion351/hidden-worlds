@@ -2,7 +2,7 @@
 data:extend{
   {
     type = "recipe-category",
-    name = "wood-splitter"
+    name = "log-splitter"
   },
   {
     type = "recipe-category",
@@ -14,7 +14,7 @@ data:extend{
 data:extend{
   {
     type = "item-subgroup",
-    name = "wood-splitter",
+    name = "log-splitter",
     group = "intermediate-products"
   },
   {
@@ -91,5 +91,5 @@ local function make_stock_to_part_fanout(stock, part, crafting_machine_tint, cat
   end
 end
 
-make_stock_to_part_fanout("split-lumber", "plank", {r = 1, g = 1, b = 1, a = 1}, "wood-splitter", "wood-splitter", "d", 2, 5, {}, {})
-make_stock_to_part_fanout("split-lumber", "plank", {r = 1, g = 1, b = 1, a = 1}, "wood-splitter", "wood-splitter", "d", 2, 5, {}, {})
+make_stock_to_part_fanout("split-lumber", "plank", {r = 1, g = 1, b = 1, a = 1}, "log-splitter", "log-splitter", "d", 2, 5, {}, {})
+make_stock_to_part_fanout("split-lumber", "plank", {r = 1, g = 1, b = 1, a = 1}, "log-splitter", "log-splitter", "d", 2, 5, {}, {})
