@@ -2,9 +2,11 @@
 local linked_water_pipe = {
     name = "linked_water_pipe",
     type = "infinity-pipe",
+    gui_mode = "none",
     icon = "__base__/graphics/icons/fluid/water.png",
     fluid_box = {
         volume = 100,
+        hide_connection_info = true,
         pipe_connections = {{
             --flow_direction = "output",
             connection_type = "linked",
@@ -15,10 +17,9 @@ local linked_water_pipe = {
     },
     horizontal_window_bounding_box = {{0, 0}, {0, 0}},
     vertical_window_bounding_box = {{0, 0}, {0, 0}},
-    pictures = table.deepcopy(data.raw.pipe["pipe"].pictures),
     collision_mask = {layers = {}},
-    collision_box = {{-0.4, -0.4}, {0.4, 0.4}},
-    selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
+    icon_draw_specification = {scale = 0.0},
+    hidden = true
 }
 
 ---@type data.RecipeCategory
