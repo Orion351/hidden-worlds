@@ -1,9 +1,9 @@
 ---@type data.FurnacePrototype
 local splitterEntity = {
-    name = "wood-splitter",
+    name = "log-splitter",
     type = "furnace",
     crafting_speed = 1,
-    minable = {mining_time = 0.2, result = "wood-splitter"},
+    minable = {mining_time = 0.2, result = "log-splitter"},
     energy_usage = "100kW",
     energy_source = {
         type = "fluid",
@@ -22,13 +22,13 @@ local splitterEntity = {
         }
     },
     crafting_categories = {
-        "wood-splitter"
+        "log-splitter"
     },
     collision_box = {{-1.4, -1.4}, {1.4, 1.4}},
     selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
     source_inventory_size = 1,
     result_inventory_size = 1,
-    icon = "__hidden-worlds__/graphics/icons/entity/woodSplitter.png"
+    icon = "__hidden-worlds__/graphics/icons/entity/logSplitter.png"
 }
 splitterEntity.graphics_set = table.deepcopy(data.raw["furnace"]["electric-furnace"].graphics_set)
 
@@ -46,7 +46,7 @@ local splitterItem = {
 
 ---@type data.RecipePrototype
 local splitterRecipe = {
-    name = "wood-splitter-recipe",
+    name = "log-splitter-recipe",
     type = "recipe",
     category = "basic-crafting",
     ingredients = {
