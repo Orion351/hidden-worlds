@@ -3,6 +3,8 @@ HW_Global.wood = {}
 
 -- Item Constants
 HW_Global.wood.wood_stack_size = 100
+HW_Global.wood.wood_assembler_stack_size = 50
+HW_Global.wood.wood_assembler_weight = 1 * kg
 
 -- Item Annotations
 ---@alias WoodMaterial "hardwood" | "softwood" | "burntwood"

@@ -1,5 +1,5 @@
 -- Fuel Categories
 data:extend{{
-    type = "fuel-category",
-    name = "wood"
+  type = "fuel-category",
+  name = "wood"
 }}

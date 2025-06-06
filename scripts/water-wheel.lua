@@ -1,5 +1,4 @@
 ---@alias unit_number integer
-
 ---@class WaterWheelScriptData
 ---@field wheels table<unit_number, WaterWheel>
 local script_data = {

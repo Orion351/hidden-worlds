@@ -12,11 +12,11 @@ data:extend({
 
 for i, slide_name in pairs(slide_names) do
   data:extend({
-    {
+    { -- recipe-category
       type = "recipe-category",
       name = slide_name .. "-recipes"
     },
-    {
+    { -- item
       type = "item",
       name = slide_name .. "-slide",
       stack_size = 10,
@@ -24,7 +24,7 @@ for i, slide_name in pairs(slide_names) do
       icon_size = 64,
       place_result = slide_name .. "-slide"
     },
-    {
+    { -- furnace
       type = "furnace",
       name = slide_name .. "-slide",
       crafting_categories = {slide_name .. "-recipes"},
