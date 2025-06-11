@@ -36,3 +36,8 @@ require("prototypes/domains/woods/woods-recipe-categories")
 require("prototypes/domains/woods/woods-recipes")
 require("prototypes/domains/woods/woods-infinity-pipe")
 require("prototypes/domains/woods/woods-entities")
+
+
+-- Places
+-- ******
+require("prototypes/places/nauvis/nauvis_caldera")
