@@ -6,4 +6,4 @@ local handler = require("event_handler")
 --   local a = 1
 -- end)
 
-handler.add_lib(require("scripts/water-wheel"))
+handler.add_lib(require("lib-experimental/water-wheel"))
