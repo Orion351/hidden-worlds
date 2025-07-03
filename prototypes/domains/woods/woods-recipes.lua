@@ -118,6 +118,7 @@ data:extend{{ -- axle-5x1
   -- Basic
   type = "recipe",
   name = "axle-5x1-recipe",
+  enabled = false,
   -- Game
   emissions_multiplier = 0,
   energy_required = 0.1,
@@ -129,7 +130,9 @@ data:extend{{ -- axle-5x1
   order = "a axle-5x1-recipe",
   subgroup = "wood-logistics",
   -- Input/Output
-  ingredients = {},
+  ingredients = {
+    { type = "item", name = "wood", amount = 1 },
+  },
   results = {{type = "item", name = "axle-5x1", amount = 1}},
   main_product = "axle-5x1",
   -- Quality Mod
@@ -191,6 +194,7 @@ data:extend{{ -- water-wheel
   -- Basic
   type = "recipe",
   name = "water-wheel-recipe",
+  enabled = false,
   -- Game
   emissions_multiplier = 0,
   energy_required = 0.1,
@@ -202,7 +206,9 @@ data:extend{{ -- water-wheel
   order = "a water-wheel-recipe",
   subgroup = "wood-torque-source",
   -- Input/Output
-  ingredients = {},
+  ingredients = {
+    { type = "item", name = "wood", amount = 1 },
+  },
   results = {{type = "item", name = "water-wheel", amount = 1}},
   main_product = "water-wheel",
   -- Quality Mod

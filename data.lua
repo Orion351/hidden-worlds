@@ -41,3 +41,8 @@ require("prototypes/domains/woods/woods-entities")
 -- Places
 -- ******
 require("prototypes/places/landable-surfaces/vanilla-planets/nauvis/nauvis_caldera")
+
+-- Tech System
+-- Should be after all recipes are loaded so maybe move to data-final-updates
+require("prototypes/lib/tech-mod-data")
+require("prototypes/lib/tech")
