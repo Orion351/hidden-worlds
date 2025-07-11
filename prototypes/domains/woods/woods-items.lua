@@ -1,12 +1,3 @@
--- Item Subgroup
-data:extend{
-  {
-    type = "item-subgroup",
-    name = "wood",
-    group = "intermediate-products"
-  }
-}
-
 -- Item Helper Functions
 local function make_wood_items(names, domain, order, weight, subgroup, fuel_value, tags)
   for _, name in pairs(names) do
@@ -49,7 +40,36 @@ local function make_wood_items(names, domain, order, weight, subgroup, fuel_valu
   end
 end
 
+local function make_wood_assembler_item(name, domain, order, weight, flags, tags)
+  data:extend{{
+    -- Basic
+    type = "item",
+    name = name,
+    -- Game
+    stack_size = HW_Global.wood.wood_assembler_stack_size,
+    place_result = name,
+    flags = flags,
+    -- Display
+    icon = "__hidden-worlds__/graphics/icons/entity/" ..  name .. ".png",
+    icon_size = 64,
+    -- Organization
+    group = "production",
+    subgroup = "wood-assemblers",
+    order = order .. " " .. name,
+    -- Space Age
+    weight = weight,
+    -- Quality Mod
+    auto_recycle = true,
+    -- Sidecar
+    hw_sidecar_item = tags --[[@as hw_sidecar_item]] ---@diagnostic disable-line: assign-type-mismatch
+    -- Icon Badges FIXME
+    -- Localization FIXME
+  }}
+end
+
 -- Items Creation
+--   Intermediates
+
 -- FIXME: Work out proper values for fuel_value
 
 -- Make timber
@@ -89,3 +109,127 @@ for _, property in pairs(HW_Global.wood.wood_properties) do
   make_wood_items({property .. "-wood-gear"},
     "woods", "d", 1 * kg, "wood", "1MJ", {"wood", "gear", "part", property})
 end
+
+
+
+--   Entities
+--   Wood Assemblers
+local wood_assembler_data = {
+  ["log-splitter"]     = {},
+  ["log-stripper"]     = {},
+  ["grindstone"]       = {},
+  ["rope-twister"]     = {},
+  ["spin-n-sieve"]     = {},
+  ["stone-autohammer"] = {},
+  ["stone-crusher"]    = {},
+  ["wood-planer"]      = {},
+  ["wood-tablesaw"]    = {},
+  ["wood-lathe"]       = {},
+  ["wood-vat"]         = {},
+  ["wood-press"]       = {},
+}
+for name, _ in pairs(wood_assembler_data) do
+  make_wood_assembler_item(name, "wood", "a", HW_Global.wood.wood_assembler_weight, {}, {})
+end
+
+-- Wood Logistics
+data:extend{{
+  -- Basic
+  type = "item",
+  name = "axle-5x1",
+  -- Game
+  stack_size = 100,
+  place_result = "axle-5x1",
+  flags = {},
+  -- Display
+  icon = "__hidden-worlds__/graphics/icons/entity/axle-5x1.png",
+  icon_size = 64,
+  -- Organization
+  group = "logistics",
+  subgroup = "wood-logistics",
+  order = "a axle-5x1",
+  -- Space Age
+  weight = 1 * kg,
+  -- Quality Mod
+  auto_recycle = true,
+  -- Sidecar
+  hw_sidecar_item = {} --[[@as hw_sidecar_item]] ---@diagnostic disable-line: assign-type-mismatch
+  -- Icon Badges FIXME
+  -- Localization FIXME
+}}
+
+data:extend{{
+  -- Basic
+  type = "item",
+  name = "wood-trough",
+  -- Game
+  stack_size = 100,
+  place_result = "wood-trough",
+  flags = {},
+  -- Display
+  icon = "__hidden-worlds__/graphics/icons/entity/wood-trough.png",
+  icon_size = 64,
+  -- Organization
+  group = "logistics",
+  subgroup = "wood-logistics",
+  order = "a wood-trough",
+  -- Space Age
+  weight = 1 * kg,
+  -- Quality Mod
+  auto_recycle = true,
+  -- Sidecar
+  hw_sidecar_item = {} --[[@as hw_sidecar_item]] ---@diagnostic disable-line: assign-type-mismatch
+  -- Icon Badges FIXME
+  -- Localization FIXME
+}}
+
+data:extend{{
+  -- Basic
+  type = "item",
+  name = "wood-chute",
+  -- Game
+  stack_size = 100,
+  place_result = "wood-chute",
+  flags = {},
+  -- Display
+  icon = "__hidden-worlds__/graphics/icons/entity/wood-chute.png",
+  icon_size = 64,
+  -- Organization
+  group = "logistics",
+  subgroup = "wood-logistics",
+  order = "a wood-chute",
+  -- Space Age
+  weight = 1 * kg,
+  -- Quality Mod
+  auto_recycle = true,
+  -- Sidecar
+  hw_sidecar_item = {} --[[@as hw_sidecar_item]] ---@diagnostic disable-line: assign-type-mismatch
+  -- Icon Badges FIXME
+  -- Localization FIXME
+}}
+
+-- Wood Torque Source
+data:extend{{
+  -- Basic
+  type = "item",
+  name = "water-wheel",
+  -- Game
+  stack_size = 50,
+  place_result = "water-wheel",
+  flags = {},
+  -- Display
+  icon = "__hidden-worlds__/graphics/icons/entity/water-wheel.png",
+  icon_size = 64,
+  -- Organization
+  group = "production",
+  subgroup = "wood-torque-source",
+  order = "a water-wheel",
+  -- Space Age
+  weight = 1 * kg,
+  -- Quality Mod
+  auto_recycle = true,
+  -- Sidecar
+  hw_sidecar_item = {} --[[@as hw_sidecar_item]] ---@diagnostic disable-line: assign-type-mismatch
+  -- Icon Badges FIXME
+  -- Localization FIXME
+}}
