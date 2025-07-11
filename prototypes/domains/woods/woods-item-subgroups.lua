@@ -20,6 +20,13 @@ data:extend{{
 	group = "production"
 }}
 
+--   Wood Workshop Subgroup
+data:extend{{
+	type = "item-subgroup",
+	name = "wood-workshop",
+	group = "production"
+}}
+
 --   Logistics Subgroups
 data:extend{{
 	type = "item-subgroup",

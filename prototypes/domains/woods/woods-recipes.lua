@@ -254,3 +254,30 @@ for item_name, item_data in pairs(data.raw.item) do
     hidden = true,
   }}
 end
+
+-- Wood domain experiments
+data:extend{
+  {
+    type = "recipe",
+    name = "wood-workshop",
+    icon = "__hidden-worlds__/graphics/icons/entity/wood-workshop.png",
+    icon_size = 64,
+    ingredients = {{type = "item", name = "wood", amount = 1}},
+    results = {{type = "item", name = "wood-workshop", amount = 1}},
+    energy_required = 1,
+    category = "crafting",
+    enabled = true
+  },
+  {
+    type = "recipe",
+    name = "wood-planing",
+    icon = "__hidden-worlds__/graphics/icons/experiments/wood-planing.png",
+    icon_size = 64,
+    ingredients = {{type = "item", name = "wood", amount = 1}},
+    results = nil,
+    energy_required = 1,
+    category = "wood-workshop",
+    enabled = true,
+    result_is_always_fresh = true
+  }
+}

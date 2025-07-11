@@ -35,7 +35,12 @@ These experiments consist of the following parts:
 ---@field data TechDomainTechExperiment
 
 ---@class TechDomainTechExperiment
----@field name string
+---@field name string Name of this experiment
+---@field techs string[] Techs this experiment improves
+---@field recipe string Name of recipe associated with this experiment
+---@field modifier TechExperimentModifier
+---@field value number
+---@field levels int[] Amount of crafts required for each level.
 
 -- Runtime data types
 ---@class LuaTechDomainModData : LuaModData
@@ -54,11 +59,14 @@ These experiments consist of the following parts:
 ---@field base_probability number
 ---@field experiments string
 
+---@class LuaTechDomainTechExperimentModData : LuaModData
+---@field data TechDomainTechExperiment
 
----@param domain string
----@param name string
----@param recipe string
----@param base_probability number
+
+---@param domain string Domain name
+---@param name string Tech name
+---@param recipe string Recipe name this tech unlocks
+---@param base_probability number Base probability to unlock the tech after crafting each prototype
 ---@return TechDomainTechModData
 local function create_domain_tech(domain, name, recipe, base_probability)
   return {
@@ -74,13 +82,35 @@ local function create_domain_tech(domain, name, recipe, base_probability)
   }
 end
 
+---@param domain string Domain name
+---@return TechDomainModData
 local function create_domain(domain)
   return {
     type = "mod-data",
-    name = "hidden-worlds-timberworking-tech-domain",
+    name = "hidden-worlds-".. domain .."-tech-domain",
     data_type = "hidden-worlds.tech-domain",
     data = {
       name = domain,
+    }
+  }
+end
+
+---@alias TechExperimentModifier "add"|"mult"
+
+---@param data TechDomainTechExperiment
+---@return data.ModData
+local function create_experiment(data)
+  return {
+    type = "mod-data",
+    name = "hidden-worlds-" .. data.name .. "-tech-experiment",
+    data_type = "hidden-worlds.tech-experiment",
+    data = {
+      name = data.name,
+      techs = data.techs,
+      recipe = data.recipe,
+      modifier = data.modifier,
+      value = data.value,
+      levels = data.levels
     }
   }
 end
@@ -90,6 +120,15 @@ local customTechDomainsModData = {
   create_domain("timberworking"),
   create_domain_tech("timberworking", "axles", "axle-5x1-recipe", 0.1),
   create_domain_tech("timberworking", "water-wheel", "water-wheel-recipe", 0.1),
+  create_experiment({
+    name = "wood-planing",
+    techs = {"axles-recipe", "water-wheel-recipe"},
+    recipe = "wood-planing",
+    modifier = "add",
+    --value = 1.01,
+    value = .05,
+    levels = {1, 2, 4, 8, 16, 32} -- Example, realistically it should start way
+  }),
 }
 
 data:extend(customTechDomainsModData)

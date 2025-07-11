@@ -78,6 +78,12 @@ data:extend{{
   name = "water-wheel"
 }}
 
+-- Workshop
+data:extend{{
+  type = "recipe-category",
+  name = "wood-workshop"
+}}
+
 -- Miner 
 -- This ... isn't needed, I just typed it and instead of deleting it I left a comment explaining it
 -- data:extend{{

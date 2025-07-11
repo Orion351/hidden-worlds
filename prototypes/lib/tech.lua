@@ -1,5 +1,4 @@
 --local icon_root = "__hidden-worlds__/graphics/technology"
-
 ---@param domain TechDomain
 local function create_domain_tech(domain)
   return {
@@ -49,9 +48,18 @@ local function set_prototype_localisation(prototype)
     end
 end
 
+local blueprint_tint = {r = 74 / 255, g = 109 / 255, b = 229 / 255, a = 255 / 255} -- Blueprint blue
+local experiment_tint = {r = 50 / 255, g = 82 / 255, b = 47 / 255, a = 255 / 255} -- Just some green color
+
 ---@param recipe data.RecipePrototype
-local function tint_prototype_icon(recipe)
-  local tint = {r = 74 / 255, g = 109 / 255, b = 229 / 255, a = 255 / 255} -- Blueprint blue
+---@param tint Color
+local function tint_prototype_icon(recipe, tint)
+  if tint.r > 1 or tint.g > 1 or tint.b > 1 or tint.a > 1 then
+    tint.r = tint.r / 255
+    tint.g = tint.g / 255
+    tint.b = tint.b / 255
+    tint.a = tint.a / 255
+  end
   if recipe.icon then
     recipe.icons =
     {{
@@ -72,6 +80,66 @@ local function tint_prototype_icon(recipe)
   end
 end
 
+---@class LuaSpoilageEventModData : LuaModData
+---@field data LuaSpoilageEvent
+
+---@class LuaSpoilageEvent
+---@field type SpoilageEventTypes
+
+---@class LuaPrototypeSpoilageEvent : LuaSpoilageEvent
+---@field recipe string
+
+---@class LuaExperimentSpoilageEvent : LuaSpoilageEvent
+---@field recipe string
+
+---@alias SpoilageEventTypes "prototype"|"experiment"
+
+---@class SpoilageEventData
+---@field type SpoilageEventTypes
+
+---@class PrototypeSpoilageEventData : SpoilageEventData
+---@field recipe string Base recipe the prototype tries to unlock
+
+---@class ExperimentSpoilageEventData : SpoilageEventData
+---@field experiment_name string
+
+---@alias SpoilageEventDatas PrototypeSpoilageEventData|ExperimentSpoilageEventData
+
+---@param item_name string
+---@param spoilage_data SpoilageEventDatas
+local function create_spoilage_event(item_name, spoilage_data)
+  data:extend{{
+    type = "mod-data",
+    name = "hidden-worlds-" .. item_name .. "-spoilage-event",
+    data_type = "hidden-worlds.spoilage-event",
+    data = spoilage_data
+  }}
+end
+
+---@param prototype data.ItemPrototype
+local function set_item_spoilage_event(prototype)
+  prototype.spoil_ticks = 1
+  prototype.spoil_result = nil
+  prototype.burnt_result = nil
+  prototype.spoil_to_trigger_result = {
+    trigger = {
+      type = "direct",
+      action_delivery =
+      {
+        type = "instant",
+        source_effects =
+        {
+            {
+                type = "script",
+                effect_id = "hidden-worlds-" .. prototype.name .. "-spoilage-event"
+            },
+        }
+      }
+    },
+    items_per_trigger = 1
+  }
+end
+
 ---@param tech TechDomainTech 
 local function create_prototype_recipe_and_item(tech)
   local base_recipe = data.raw.recipe[tech.recipe]
@@ -81,8 +149,9 @@ local function create_prototype_recipe_and_item(tech)
   prototype_recipe.name = prototype_recipe.name .. "-prototype"
   prototype_recipe.auto_recycle = false
   prototype_recipe.enabled = true -- TODO remove
+  prototype_recipe.result_is_always_fresh = true
   set_prototype_localisation(prototype_recipe)
-  tint_prototype_icon(prototype_recipe)
+  tint_prototype_icon(prototype_recipe, blueprint_tint)
 
   local prototype_results = {}
 
@@ -100,34 +169,15 @@ local function create_prototype_recipe_and_item(tech)
   local prototype_item = table.deepcopy(base_item)
   prototype_item.name = prototype_item_name
   set_prototype_localisation(prototype_item)
-  tint_prototype_icon(prototype_item)
-  prototype_item.spoil_ticks = 1
-  prototype_item.spoil_result = nil
-  prototype_item.burnt_result = nil
-  prototype_item.spoil_to_trigger_result = {
-    trigger = {
-      type = "direct",
-      action_delivery =
-      {
-        type = "instant",
-        source_effects =
-        {
-            {
-                type = "script",
-                effect_id = "hwt_" .. base_recipe.name
-            },
-        }
-      }
-    },
-    items_per_trigger = 1
-  }
+  tint_prototype_icon(prototype_item, blueprint_tint)
+  set_item_spoilage_event(prototype_item)
 
   table.insert(prototype_results, {
     type = "item",
     name = prototype_item_name,
     amount = 1
   })
-
+  create_spoilage_event(prototype_item_name, {type = "prototype", recipe = base_recipe.name})
   ---@diagnostic disable-next-line: assign-type-mismatch
   data:extend({prototype_item})
   prototype_recipe.results = prototype_results
@@ -136,7 +186,6 @@ local function create_prototype_recipe_and_item(tech)
   log("prototype recipe prototype: " .. serpent.dump(prototype_recipe))
   ---@diagnostic disable-next-line: assign-type-mismatch
   data:extend({prototype_recipe})
-  -- end
 end
 
 
@@ -150,12 +199,35 @@ for _, mod_data in pairs(data.raw["mod-data"]) do
   end
 end
 
--- Adding all unlocks to the domain tech and creating the prototype items and recipes
 for _, mod_data in pairs(data.raw["mod-data"]) do
   if mod_data.data_type == "hidden-worlds.tech-domain-tech" then
+    -- Adding all unlocks to the domain tech and creating the prototype items and recipes
     ---@cast mod_data TechDomainTechModData
     add_domain_tech(domains, mod_data.data)
     create_prototype_recipe_and_item(mod_data.data)
+  elseif mod_data.data_type == "hidden-worlds.tech-experiment" then
+    -- Creating experiment result items with their spoilage events.
+    -- Set the experiment recipe's results to the item
+    ---@cast mod_data TechDomainTechExperimentModData
+    local experiment = mod_data.data
+    local item = {
+      type = "item",
+      name = experiment.name .. "-experiment-result",
+      stack_size = 1,
+      icon = "__hidden-worlds__/graphics/icons/experiments/".. experiment.name .. ".png",
+      icon_size = 64,
+      hidden = true,
+      hidden_in_factoriopedia = true
+    }
+    tint_prototype_icon(item, experiment_tint)
+    set_item_spoilage_event(item)
+    data:extend({item})
+
+    create_spoilage_event(item.name, {type = "experiment", experiment_name = "hidden-worlds-" .. experiment.name .. "-tech-experiment"})
+
+    local recipe_prototype = data.raw.recipe[experiment.recipe]
+    tint_prototype_icon(recipe_prototype, experiment_tint)
+    recipe_prototype.results = {{type = "item", name = item.name, amount = 1}}
   end
 end
 

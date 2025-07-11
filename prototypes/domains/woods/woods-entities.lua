@@ -622,3 +622,57 @@ data:extend{{
     }
   }
 }}
+
+
+-- Workshop
+data:extend{{
+  name = "wood-workshop",
+  type = "assembling-machine",
+  crafting_speed = 1,
+  minable = {mining_time = 0.2, result = "wood-workshop"},
+  flags = {"placeable-neutral", "placeable-player", "player-creation"},
+  energy_usage = "100kW",
+  energy_source = {
+    type = "fluid",
+    --fluid_usage_per_tick = 1,
+    burns_fluid = true,
+    scale_fluid_usage = true,
+    fluid_box = {
+      volume = 100,
+      filter = "torque",
+      production_type = "input",
+      pipe_connections = {{
+        flow_direction = "input",
+        direction = defines.direction.north --[[@as data.Direction]],
+        position = {0, -1},
+        connection_category = "torque"
+      }}
+    }
+  },
+  crafting_categories = {
+    "wood-workshop"
+  },
+  collision_box = {{-1.4, -1.4}, {1.4, 1.4}},
+  selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+  icon = "__hidden-worlds__/graphics/icons/entity/wood-workshop.png",
+  graphics_set = {
+    animation = {
+      north = {
+        layers = {
+          {
+            filename = "__hidden-worlds__/graphics/greybox/grey-boxes/hw-grey-box-3x3.png",
+            width = 192,
+            height = 192,
+            scale = 0.5
+          },
+          {
+            filename = "__hidden-worlds__/graphics/greybox/primitive-titles/hw-label-wood-workshop.png",
+            width = 128,
+            height = 64,
+            scale = 0.5
+          }
+        }
+      }
+    }
+  }
+}}

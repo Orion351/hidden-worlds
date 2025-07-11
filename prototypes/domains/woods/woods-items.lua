@@ -233,3 +233,29 @@ data:extend{{
   -- Icon Badges FIXME
   -- Localization FIXME
 }}
+
+-- Workshop
+data:extend{{
+  -- Basic
+  type = "item",
+  name = "wood-workshop",
+  -- Game
+  stack_size = 50,
+  place_result = "wood-workshop",
+  flags = {},
+  -- Display
+  icon = "__hidden-worlds__/graphics/icons/entity/wood-workshop.png",
+  icon_size = 64,
+  -- Organization
+  group = "production",
+  subgroup = "wood-workshop",
+  order = "a wood-workshop",
+  -- Space Age
+  weight = 1 * kg,
+  -- Quality Mod
+  auto_recycle = true,
+  -- Sidecar
+  hw_sidecar_item = {} --[[@as hw_sidecar_item]] ---@diagnostic disable-line: assign-type-mismatch
+  -- Icon Badges FIXME
+  -- Localization FIXME
+}}
